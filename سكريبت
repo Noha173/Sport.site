@@ -1,0 +1,16 @@
+document.getElementById('fetchButton').addEventListener('click', () => {
+    fetch('https://api.sportsdata.io/v4/soccer/scores/json/GamesByDate/2024-12-04?key=38678efac8e24cde822a7f15a92f446f')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `Match: ${data[0].HomeTeamName} vs ${data[0].AwayTeamName}`;
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+});
